@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "2cc615a0-7259-415e-ab28-13eb2a02961a",
+		"name": "practicedb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "Retrieve data inside db",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"console.log(response);\r",
+							"const persons = response[0];\r",
+							"console.log(persons);\r",
+							"console.log(persons.other[\"social-media\"][1]);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Person is John\" , function() {\r",
+							"    pm.expect(persons.firstName).to.eql(\"John\");\r",
+							"    pm.expect(persons.lastName).to.eql(\"doe\");\r",
+							"    pm.expect(persons.age).to.eql(26);\r",
+							"    pm.expect(persons.other.email).to.eql(\"john@example.com\");\r",
+							"    pm.expect(persons.other[\"social-media\"][1]).to.include(\"Instagram\");\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Find a age\", function() {\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var ageToFind = pm.variables.get(\"ageToFind\");\r",
+							"\r",
+							"    for (var i=0; i<jsonData.length; i++) {\r",
+							"        var persons = jsonData[i];\r",
+							"        if (persons.age === ageToFind) {\r",
+							"            console.log(\"Age \" + ageToFind + \" found\");\r",
+							"            return; // terminate the test early since we found the age\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    // if we get here, the age was not found\r",
+							"    console.log(\"Age \" + ageToFind + \" not found\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"ageToFind\", 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve data inside db Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Step 1 : Validate Status Code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Step 2 : Validate Reponse Body\r",
+							"//Step 2.1 : Fetch response body\r",
+							"var persons = pm.response.json();\r",
+							"//Step 2.2 Fetch response body data array length\r",
+							"var dataArray = persons.data;\r",
+							"var count = Object.keys(dataArray).length;\r",
+							"//Step 2.3 : Fetch response body params\r",
+							"for (i=0 ; i<count ; i++)\r",
+							"{\r",
+							"    console.log(\"Data at index :\" +i)\r",
+							"    var res_firstname = persons.data[i].firstname;\r",
+							"    console.log(res_firstname);\r",
+							"    var res_lastname = persons.data[i].lastname;\r",
+							"    console.log(res_lastname);\r",
+							"    var res_age = persons.data[i].age;\r",
+							"    console.log(res_age);\r",
+							"    var res_last_name = responseBody.data[i].last_name;\r",
+							"    console.log(res_last_name)\r",
+							"    var res_avatar = responseBody.data[i].avatar;\r",
+							"    console.log(res_avatar)\r",
+							"\r",
+							"}\r",
+							"pm.test(\"Verify first user's id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].id).to.eql(7);\r",
+							"    });\r",
+							"pm.test(\"Verify first user's email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].email).to.eql(\"michael.lawson@reqres.in\");\r",
+							"    });\r",
+							"pm.test(\"Verify first user's first_name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].first_name).to.eql(\"Michael\");\r",
+							"    });\r",
+							"pm.test(\"Verify first user's last_name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].last_name).to.eql(\"Lawson\");\r",
+							"    });\r",
+							"pm.test(\"Verify first user's avatar\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].avatar).to.eql(\"https://reqres.in/img/faces/7-image.jpg\");\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Find a age\", function() {\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var ageToFind = pm.variables.get(\"ageToFind\");\r",
+							"\r",
+							"    for (var i=0; i<jsonData.length; i++) {\r",
+							"        var persons = jsonData[i];\r",
+							"        if (persons.age === ageToFind) {\r",
+							"            console.log(\"Age \" + ageToFind + \" found\");\r",
+							"            return; // terminate the test early since we found the booking ID\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    // if we get here, the booking ID was not found\r",
+							"    console.log(\"Age \" + ageToFind + \" not found\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"ageToFind\", 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pre req script practice for dynamic variables",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var Random_number = pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+							"pm.collectionVariables.set(\"Coll_Random_id\", Random_number);\r",
+							"//pm.collectionVariables.set(\"Coll_Random_id\", _.random(20,30));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{Coll_Random_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pre req script practice for dynamic variables Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//var Random_number = pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+							"// pm.collectionVariables.set(\"Coll_Random_id\", Random_number);\r",
+							"//pm.collectionVariables.set(\"Coll_Random_id\", _.random(20,30));\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate data type for name and price\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var products = jsonData.products;\r",
+							"\r",
+							"    for (var i = 0; i < products.length; i++) {\r",
+							"        pm.expect(products[0].name).to.be.a(\"string\");\r",
+							"        pm.expect(products[0].price).to.be.a(\"number\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name and value fields under additional\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var additional = jsonData.additional;\r",
+							"\r",
+							"    for (var i = 0; i < additional.length; i++) {\r",
+							"        pm.expect(additional[0].name).to.eql(\"Arbitrary Name\");\r",
+							"        pm.expect(additional[0].value).to.eql(\"Additional Value\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name and value fields under additional\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var additional = jsonData.additional;\r",
+							"\r",
+							"    for (var i = 0; i < additional.length; i++) {\r",
+							"        pm.expect(additional[1].name).to.eql(\"Other Arbitrary Name\");\r",
+							"        pm.expect(additional[1].value).to.eql(\"Really Long Value Here, Anything goes.\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstName\": \"John\",\r\n\t\"lastName\": \"doe\",\r\n\t\"executiveSummary\": \"Below, you will find a proposal, etc. etc.\",\r\n\t\"products\": [\r\n\t\t{\r\n\t\t\t\"name\": \"test product\",\r\n\t\t\t\"quantity\": 5,\r\n\t\t\t\"price\": 10,\r\n\t\t\t\"total\": 50\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"name\": \"Creative Name\",\r\n\t\t\t\"quantity\": 10,\r\n\t\t\t\"price\": 20,\r\n\t\t\t\"total\": 200\r\n\t\t},\r\n\t\t{\r\n\t\t \t\"name\": \"Other\",\r\n\t\t\t\"quantity\": 100,\r\n\t\t\t\"price\": 200,\r\n\t\t\t\"total\": 2000\r\n\t\t}\r\n\t],\r\n\t\"additional\": [\r\n\t\t{\r\n\t\t\t\"name\": \"Arbitrary Name\",\r\n\t\t\t\"value\": \"Additional Value\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"name\": \"Other Arbitrary Name\",\r\n\t\t\t\"value\": \"Really Long Value Here, Anything goes.\"\r\n\t\t}\r\n\t],\r\n\t\"terms\": [\r\n\t\t{\r\n\t\t\t\"text\": \"Lorem Ipsum dolor sit amet, consectetur adipiscing elit. Donec eu finibus massa. Ut et purus odio. Donec pellentesque, urna quis molestie bibendum, nibh tortor dapibus leo, sit amet tincidunt mauris mi eu quam.\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"text\": \"Etiam id felis a velit egestas aliquam at vel est. In quis tristique lacus. Vestibulum sit amet nisi nisi. Proin a mauris pellentesque, condimentum ex ut, euismod orci.\"\r\n\t\t },\r\n\t\t{\r\n\t\t\t\"text\": \"Quisque laoreet tincidunt velit, sit amet placerat mi suscipit ac. Ut laoreet et nibh id mattis. Cras sed felis malesuada, facilisis libero in, dapibus felis. Nunc sit amet egestas velit. Integer id mollis nisi.\"\r\n\t\t}\r\n\t]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate name & value from productsDB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate name and value fields under additional\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var additional = jsonData.additional;\r",
+							"\r",
+							"    for (var i = 0; i < additional; i++) {\r",
+							"        pm.expect(additional[0].name).to.eql(\"Arbitrary Name\");\r",
+							"        pm.expect(additional[0].value).to.eql(\"Additional Value\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/additional",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"additional"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Datatype validate from productsDB Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate data type for name and price\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var products = jsonData.products;\r",
+							"\r",
+							"    for (var i = 0; i < products; i++) {\r",
+							"        pm.expect(products[0].name).to.be.a(\"String\");\r",
+							"        pm.expect(products[0].price).to.be.a(\"Number\");\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Coll_Random_id",
+			"value": ""
+		}
+	]
+}

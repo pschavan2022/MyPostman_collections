@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "0cec7434-9dc6-4a53-9d4a-cf329711532d",
+		"name": "Booker_booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "To find the specific booking id from the array",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"bookingToFind\", 144);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Find a Booking ID\", function() {\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var bookingToFind = pm.variables.get(\"bookingToFind\");\r",
+							"\r",
+							"    for (var i=0; i<jsonData.length; i++) {\r",
+							"        var booking = jsonData[i];\r",
+							"        if (booking.bookingid === bookingToFind) {\r",
+							"            console.log(\"Booking ID \" + bookingToFind + \" found\");\r",
+							"            return; // terminate the test early since we found the booking ID\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    // if we get here, the booking ID was not found\r",
+							"    console.log(\"Booking ID \" + bookingToFind + \" not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

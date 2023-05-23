@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "b8c3da65-ecbe-423e-8d18-20ca4d4cf2d3",
+		"name": "Jenkins_collectionrunner_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "Post_CREATE Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Step 1 : Validate Response Status Code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"//Step 2 : Set expected results using environment variables\r",
+							"var expectedDate =  new Date().toJSON().slice(0,16)\r",
+							"console.log(expectedDate);\r",
+							"pm.environment.set(\"expectedDate\",new Date().toJSON().slice(0,13));\r",
+							"\r",
+							"var requestBody = pm.request.body.raw;\r",
+							"console.log(requestBody);\r",
+							"requestBody = JSON.parse(requestBody);\r",
+							"\r",
+							"pm.environment.set(\"req_name\", requestBody.name);\r",
+							"pm.environment.set(\"req_job\", requestBody.job);\r",
+							"\r",
+							"//Step 3 : Validate Response Body\r",
+							"var responseBody = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : NAME\", function () {\r",
+							"    pm.expect(responseBody.name).to.eql(pm.environment.get(\"req_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : JOB\", function () {\r",
+							"    pm.expect(responseBody.job).to.eql(pm.environment.get(\"req_job\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : ID\", function () {\r",
+							"    pm.expect(responseBody.id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : CREATEDAT\", function () {\r",
+							"    pm.expect(responseBody.createdAt.slice(0,13)).to.eql(pm.environment.get(\"expectedDate\"));\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"Post_CREATE Copy 2\");\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post_CREATE Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Step 1 : Validate Response Status Code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"//Step 2 : Set expected results using environment variables\r",
+							"var expectedDate =  new Date().toJSON().slice(0,16)\r",
+							"console.log(expectedDate);\r",
+							"pm.environment.set(\"expectedDate\",new Date().toJSON().slice(0,13));\r",
+							"\r",
+							"var requestBody = pm.request.body.raw;\r",
+							"console.log(requestBody);\r",
+							"requestBody = JSON.parse(requestBody);\r",
+							"\r",
+							"pm.environment.set(\"req_name\", requestBody.name);\r",
+							"pm.environment.set(\"req_job\", requestBody.job);\r",
+							"\r",
+							"//Step 3 : Validate Response Body\r",
+							"var responseBody = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : NAME\", function () {\r",
+							"    pm.expect(responseBody.name).to.eql(pm.environment.get(\"req_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : JOB\", function () {\r",
+							"    pm.expect(responseBody.job).to.eql(pm.environment.get(\"req_job\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : ID\", function () {\r",
+							"    pm.expect(responseBody.id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response body parameter : CREATEDAT\", function () {\r",
+							"    pm.expect(responseBody.createdAt.slice(0,13)).to.eql(pm.environment.get(\"expectedDate\"));\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"GET_SINGLE USER Copy\");\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_SINGLE USER Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

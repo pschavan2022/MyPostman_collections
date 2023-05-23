@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "b86b06a2-b483-48df-9531-c79e1a70a35e",
+		"name": "DropBox_OAuthtest2.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "To access Dropbox TestOAuth2.0 contents",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://oauth.pstmn.io/v1/callback",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://api.dropboxapi.com/oauth2/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://www.dropbox.com/oauth2/authorize",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "{{appsecret}}",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{appkey}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "DropBoxToken",
+							"type": "string"
+						},
+						{
+							"key": "refreshTokenUrl",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"include_deleted\": false,\r\n    \"include_has_explicit_shared_members\": false,\r\n    \"include_media_info\": false,\r\n    \"include_mounted_folders\": true,\r\n    \"include_non_downloadable_files\": true,\r\n    \"path\": \"/Apps/TestOAuth2.0\",\r\n    \"recursive\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.dropboxapi.com/2/files/list_folder",
+					"protocol": "https",
+					"host": [
+						"api",
+						"dropboxapi",
+						"com"
+					],
+					"path": [
+						"2",
+						"files",
+						"list_folder"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "1aef0414-4c6c-4452-b0a3-f0b1146d6807",
+		"name": "Gorest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "https://gorest.co.in/public/v2/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 108d607bd6e0397198b6239cc3127f6d0a30560b42a2988c0a7ade5849b89c8b"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1560786,\r\n    \"name\": \"Pranay Chavan\",\r\n    \"email\": \"psc@jacobson-brekke.test\",\r\n    \"gender\": \"male\",\r\n    \"status\": \"active\"\r\n}\r\n "
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 108d607bd6e0397198b6239cc3127f6d0a30560b42a2988c0a7ade5849b89c8b",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users?id=1566878",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1566878"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

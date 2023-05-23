@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "e2c7dca7-3a4e-4e01-b155-8a765388e0be",
+		"name": "Goibibo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "https://flights-explorer.makemytrip.com/autosuggest?query=Goa+%28BOM%29&limit=20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"lcs field exists\", function () {\r",
+							"    pm.expect(pm.response.json().r[0].lcs).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"lcs field contains cc field\", function () {\r",
+							"    pm.expect(pm.response.json().r[0].lcs.cc).to.exist;\r",
+							"    pm.expect(pm.response.json().r[0].lcs).to.have.keys(['cc']);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"cc field in lcs is a string\", function () {\r",
+							"    pm.expect(pm.response.json().r[0].lcs.cc).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"cc field in lcs contains CTGOI\", function () {\r",
+							"    pm.expect(pm.response.json().r[0].lcs.cc).to.include('CTGOI');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "https://www.goibibo.com"
+					},
+					{
+						"key": "Referer",
+						"value": "https://www.goibibo.com/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "cross-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"112\", \"Google Chrome\";v=\"112\", \"Not:A-Brand\";v=\"99\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"url": {
+					"raw": "https://flights-explorer.makemytrip.com/autosuggest?query=Goa+%28BOM%29&limit=10",
+					"protocol": "https",
+					"host": [
+						"flights-explorer",
+						"makemytrip",
+						"com"
+					],
+					"path": [
+						"autosuggest"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Goa+%28BOM%29"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://atob.goibibo.com/flight/suggestions?query=air-GOX-PNQ-20230502--1-0-0-E-D&flavour=v2&deviceid=1683006433029&traffic_source=direct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check source airport ID\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.request.meta.src.id).to.eql(\"GOX\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check destination airport ID\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.request.meta.des.id).to.eql(\"PNQ\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authority",
+						"value": "atob.goibibo.com"
+					},
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "cookie",
+						"value": "ak_bmsc=95A625BF6FAC38BD71E1C80D37554DF7~000000000000000000000000000000~YAAQF7csMeQ8VKOHAQAAPsT+2hOJTrFYzb39IwSpOywlhWSsV3dkC9cbezZsB83A1gQkV3yrkCgPb8cPGbjovZScolQPj7jasrq1a7ZhM4N/yONMDiXNKzLgj6LJ/AjW7sk9LFzrAbHTcyP39w6ksjwvQFNRoHlm0BrWjEpOxppztW9v/daRZWUA3lkP9DtkGd+RCzeBm6GvMAcp3dnD8t/KYrLORHtZJEHNFFB2IfxWEAKvUAHiK4MENoSR7GhYY3GLatKkcUQQsQlpASbuYip7e/GC9YxNqGJv4wqENSpyx+NO7uzLNqkxtBu336eNP/LEfAWpkHKy96nfdEelkzJ4C0gFgs0FTFJACi/u7APpyA1iYqToYdRPlzwfgZfqykwt5fJCQZcWcCxxgUL6FyK9KgTRRTrnAJkEf1FeuC9xcAzh; bm_sz=37A224A97D71F54AB5C7E51F48748410~YAAQF7csMeY8VKOHAQAAPsT+2hPARWN26J4FIHnCqNKA4x5kKKAWp5sftyH4nrSLlkU3yyaRi1KAa3HsJLENgDNh+2U2+wuSpOam7vLBN8QyBpszKmkADv4O32wB9AJCBjrkI/TOpPkwKLbxxxjb8hNqFxg+Y0eb2Wh7fdzH8ZlOI9CusMzUHp7jCs7cQtwPoIR2UILwEVcIpFKk5rfhkZUJUYNyp6JAQncvSzpYjnH+9SVtAZGsQOpK7dbomOeOB2uvGfcS03z7I7Zkzlew/nQa3D/eSP7O7wsrydxmfw/yjNHw~4601154~3688005; __gi_vid=e4abdbba-4460-4c5a-931e-b20b2a946f34; s_ips=792; s_plt=4.85; s_tp=3270; s_nr30=1683006429843-New; _abck=CA883900884B3A8981186D99F50466C2~0~YAAQJLcsMd5mOqGHAQAAXx8A2wm3Cf6FHBl/BTvdSHD6wG4nV8TAT8L1yvMI99moTTQ/tMlT1cQpjKaINOZHNwVvU/aYzYr6pvuyvlzNSPLB++ZfuQjUuP6X4UpJqHEgPGUpoBsQ+XlsM+aUrVMNNPacJmebTpraj+zbohSr7JotNLq4f+Z63znDXYiH6cdudrLmOpHD8ez/FNqYTN75Ln8+har70U5duWfYRUe08FYP6QaVxbb+YuCq3R8C1TAO20OIrWgc8QM+/0nc8CKPlBNRXp22w6zf5kjBQWBT2CKjJQuUsV4NIQCwZlUtt1romxSkxYJv4mbm+FviBHFGZ8k8zjIBergKuioTL+SmIUzS0Ne4Yr9mCooqrZMajA48Ks2+BQfdhJmiNlapr0mufnm9SXR+oepYSg==~-1~-1~-1; bm_mi=DA44E575AB3843B84B02BF06139C5775~YAAQJLcsMd9mOqGHAQAAYB8A2xOUzWHeYqzIL+g5ReEz4QEI3eXXq6JNrwWxszlZYL+NxJIe9kG22ztKqpdfh7W4PaKHbZFZ77kQVZWKx9VBbvW6GQ1nw7PwLhS1rznhqhshkcY05FcJDxgaWS37ZPMDTCNbpuFBjhHKxFTyzRdnHFcsNWunlxueg7yS+3AqRwAzFrhimAVUwIPDU/1sAU17tM9qopjHd9cW6WW2sxsn+9x7948duqE3KObmEDLFhhqwVZBcM0M3vamwKkoiJa2tY5SueMjpp4yY3ZsaYw/yJbCSc/ls3GSrycai0QnTltS97fgxvNUqpUalKVQ0aISz8TwI9Tb4OwsEkHb41YW+skyNPg==~1; bm_sv=A10D6E45252A36301A8647C62F12710F~YAAQJLcsMeBmOqGHAQAAYB8A2xNE9KzTloTvqtcQc4VknOOKprzS8n3yebLZVgYybEAHQppLtsohakYSQP1eiMbFLTlHQK14gxH6yA1O5B5GTUcqnCLRdBnBpPQywv5C38W840fPVkJZIo4b4sODlwlcbQ0O6KZtxryqk8wQQgSVAhNkFYtrgeZxHJu/JnBGrbkzFdm/F79c7b2rW7tUtepsXC0tpFxC1udFJTqM1vZ0ZveGbqAyX3F6zCHjVDEEsg==~1; no_flights_ab=1683006433029"
+					},
+					{
+						"key": "origin",
+						"value": "https://www.goibibo.com"
+					},
+					{
+						"key": "referer",
+						"value": "https://www.goibibo.com/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"112\", \"Google Chrome\";v=\"112\", \"Not:A-Brand\";v=\"99\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://atob.goibibo.com/flight/suggestions?query=air-GOX-PNQ-20230502--1-0-0-E-D&flavour=v2&deviceid=1683006433029&traffic_source=direct",
+					"protocol": "https",
+					"host": [
+						"atob",
+						"goibibo",
+						"com"
+					],
+					"path": [
+						"flight",
+						"suggestions"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "air-GOX-PNQ-20230502--1-0-0-E-D"
+						},
+						{
+							"key": "flavour",
+							"value": "v2"
+						},
+						{
+							"key": "deviceid",
+							"value": "1683006433029"
+						},
+						{
+							"key": "traffic_source",
+							"value": "direct"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

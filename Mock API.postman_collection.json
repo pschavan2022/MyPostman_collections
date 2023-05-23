@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "90b6d652-6030-482c-92ec-9d4f04a0d699",
+		"name": "Mock API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27315147"
+	},
+	"item": [
+		{
+			"name": "Get Echo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?test=123",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/get?test=123",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "test",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 17 May 2023 09:48:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "582"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"246-zy9NuE55wIucJ5Vn+PMfC0UoO1w\""
+						},
+						{
+							"key": "set-cookie",
+							"value": "sails.sid=s%3AsQmAL9-14fakfSmhe52i3LIPOYHquQpT.sOmdfEn0koQzPNhAH7XUNKxTt%2BHqALBmyc2LGNt5bX0; Path=/; HttpOnly"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {\n        \"test\": \"123\"\n    },\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"x-forwarded-port\": \"443\",\n        \"host\": \"postman-echo.com\",\n        \"x-amzn-trace-id\": \"Root=1-6464a2d3-73b13b4e0df4bacd13c160c3\",\n        \"user-agent\": \"PostmanRuntime/7.32.2\",\n        \"accept\": \"*/*\",\n        \"cache-control\": \"no-cache\",\n        \"postman-token\": \"88c7df38-4d3c-4c83-9b5a-d22420dd0f3a\",\n        \"accept-encoding\": \"gzip, deflate, br\",\n        \"cookie\": \"sails.sid=s%3ActPlRNxnCObhMy4w1eX1Fua8hhjvsxun.NowpOCCqUMcMNWBNveuHHrZ4C5TT2BqyifGtWjaxz%2BE\"\n    },\n    \"url\": \"https://postman-echo.com/get?test=123\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Copy of above Get Echo API using mock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ed07e50e-02fb-4c26-890e-69b6b4d6f960.mock.pstmn.io/get",
+					"protocol": "https",
+					"host": [
+						"ed07e50e-02fb-4c26-890e-69b6b4d6f960",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Echo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/getUsers",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"getUsers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/getUsers",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"getUsers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 17 May 2023 09:54:48 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "set-cookie",
+							"value": "sails.sid=s%3AEvrZTiJWcF1amh1GlPyr_rjg2W8g64jS.uiXdKMDAAlqe3kYcLi2B71sjLH99ZIjZSwgRW0fAHX0; Path=/; HttpOnly"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\" : \"{{$randomInt}}\",\r\n    \"Firstname\" : \"{{$randomFirstName}}\",\r\n    \"Lastname\" : \"{{$randomLastName}}\",\r\n    \"Location\" : \"{{$randomCity}}\",\r\n    \"JobTitle\" : \"{{$randomJobTitle}}\",\r\n    \"updatedAt\" : \"{{$isoTimestamp}}\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Copy of above Get User Echo API using mock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ed07e50e-02fb-4c26-890e-69b6b4d6f960.mock.pstmn.io/getUsers",
+					"protocol": "https",
+					"host": [
+						"ed07e50e-02fb-4c26-890e-69b6b4d6f960",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"getUsers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
